@@ -1,0 +1,56 @@
+.form {
+  display: grid;
+  gap: 40px;
+  grid-template-rows: 40px 40px 50px;
+  grid-template-columns: 500px;
+  margin-top: 50px;
+  justify-content: center;
+}
+
+.numberContainer,
+.nameContainer {
+  position: relative;
+}
+
+.buttonForm {
+  background-color: rgb(0, 255, 0);
+  font-size: 24px;
+}
+
+.nameForm,
+.numberForm {
+  border-radius: 10px;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  background-color: white;
+  color: black;
+  box-sizing: border-box;
+  font-size: 18px;
+}
+
+.errorNameMsg,
+.errorNumberMsg {
+  font-size: 16px;
+  position: absolute;
+  top: 5px;
+  right: 20px;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    color: rgb(227, 41, 41);
+  }
+  50% {
+    color: rgb(255, 0, 0);
+  }
+  100% {
+    color: rgb(227, 41, 41);
+  }
+}
+
+.nameContainer.touched .errorNameMsg,
+.numberContainer.touched .errorNumberMsg {
+  display: none;
+}

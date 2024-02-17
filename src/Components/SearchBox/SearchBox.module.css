@@ -1,0 +1,32 @@
+.searchBoxContainer {
+  display: grid;
+  grid-template-columns: 400px;
+  justify-content: center;
+  position: relative;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+}
+
+.searchBoxText {
+  position: absolute;
+  left: 10px;
+  top: 6px;
+  color: black;
+  transition: top 0.5s;
+}
+
+.searchBoxInput:not(:placeholder-shown) + .searchBoxText,
+.searchBoxInput:focus + .searchBoxText {
+  top: -25px;
+  color: white;
+}
+
+.searchBoxInput {
+  border-radius: 15px;
+  background-color: aliceblue;
+  height: 20px;
+  color: black;
+  padding: 20px;
+}
