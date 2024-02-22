@@ -1,0 +1,42 @@
+.registerForm {
+  display: grid;
+  grid-template-columns: 40%;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+.registerField {
+  border-radius: 10px;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  background-color: white;
+  color: black;
+  box-sizing: border-box;
+  font-size: 18px;
+}
+
+.registerForm button {
+  margin-top: 15px;
+  font-size: 24px;
+}
+
+.errorMessage {
+  right: -74px;
+  top: 30px;
+  color: black;
+  animation: pulse 1s infinite;
+  font-weight: 500;
+}
+
+@keyframes pulse {
+  0% {
+    color: black;
+  }
+  50% {
+    color: red; /* Измените цвет, если нужно другое значение */
+  }
+  100% {
+    color: black;
+  }
+}

@@ -1,16 +1,17 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import css from "../ContactForm/ContactForm.module.css";
-
+import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/operations";
+import { addContact } from "../../redux/contacts/contactsOperations";
+import { Button } from "@mui/material";
 
 const NewContactSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, "Too Short!")
     .max(50, "Too Long!")
     .required("Required!"),
-  phone: Yup.string()
+  number: Yup.string()
     .required("Required!")
     .matches(
       /^\+380[0-9]+$/,
@@ -23,40 +24,55 @@ const ContactForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
-    dispatch(addContact(values));
+    dispatch(addContact(values)).then(() => {
+      toast.success(
+        `Hoola! A Contact named ${values.name}  was succesfully added`
+      );
+    });
     actions.resetForm();
   };
 
   return (
     <Formik
-      initialValues={{ name: "", phone: "" }}
+      initialValues={{ name: "", number: "" }}
       onSubmit={handleSubmit}
       validationSchema={NewContactSchema}
     >
-      <Form className={css.form}>
-        <div className={css.nameContainer}>
-          {" "}
-          <Field className={css.nameForm} type="text" name="name"></Field>
+      {({ dirty, errors }) => (
+        <Form className={css.form}>
+          <label htmlFor="name">Name</label>
+          <Field
+            className={css.nameForm}
+            id="name"
+            type="text"
+            name="name"
+          ></Field>
           <ErrorMessage
             className={css.errorNameMsg}
             name="name"
             component="span"
           />
-        </div>
-        <div className={css.numberContainer}>
-          {" "}
-          <Field type="tel" className={css.numberForm} name="phone"></Field>
+          <label htmlFor="number">Number</label>
+          <Field
+            type="tel"
+            className={css.numberForm}
+            name="number"
+            id="number"
+          ></Field>
           <ErrorMessage
             className={css.errorNumberMsg}
-            name="phone"
+            name="number"
             component="span"
           />
-        </div>
-
-        <button className={css.buttonForm} type="submit">
-          Add contact
-        </button>
-      </Form>
+          <button
+            disabled={!dirty || errors.name || errors.number}
+            className={css.buttonForm}
+            type="submit"
+          >
+            Add contact
+          </button>
+        </Form>
+      )}
     </Formik>
   );
 };

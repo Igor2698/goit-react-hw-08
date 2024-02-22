@@ -6,10 +6,37 @@
   grid-area: number;
 }
 
-.contactButton {
-  grid-area: button;
+.deleteButton,
+.changeButton {
   padding: 10px 20px;
   max-height: 45px;
   cursor: pointer;
   background-color: rgb(0, 255, 0);
+}
+
+.svgButton {
+  grid-area: buttonDelete;
+  background: linear-gradient(to right, rgb(0, 255, 0), #37b5e1);
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: color 1000ms ease-in, transform 1000ms ease-in-out;
+}
+
+.changeButton {
+  grid-area: buttonChange;
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.svgIcon {
+  transition: color 300ms ease-in, scale 300ms ease-in-out;
+  color: rgb(255, 255, 255);
+}
+
+.svgButton:hover .svgIcon {
+  scale: 1.3;
+  color: rgb(57, 26, 232);
 }

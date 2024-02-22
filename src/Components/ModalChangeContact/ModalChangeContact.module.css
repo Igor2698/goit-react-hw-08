@@ -1,0 +1,72 @@
+.form {
+  display: grid;
+  gap: 40px;
+  grid-template-rows: repeat(3, minmax(30px, 1fr));
+  grid-template-columns: 100%;
+  position: relative;
+}
+
+.labelForName,
+.labelForNumber {
+  position: absolute;
+  font-weight: 500;
+  top: -25px;
+  color: rgb(0, 255, 0);
+}
+
+.labelForNumber {
+  top: 60px;
+}
+
+.field {
+  background-color: white;
+  color: black;
+  font-size: 16px;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #37b5e1; /* Добавляем только нижнюю границу */
+  box-shadow: rgb(255, 255, 255) 1px 3px 20px;
+  transition: background-color 500ms ease-in-out;
+}
+
+.errorNameMsg,
+.errorNumberMsg {
+  font-size: 12px;
+  font-weight: 500;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: rgb(175, 24, 24);
+  max-width: 40%;
+}
+
+.errorNumberMsg {
+  position: absolute;
+  top: 90px;
+  right: 5px;
+}
+
+.invalidName,
+.invalidNumber {
+  border: 2px solid red;
+}
+
+.field:focus {
+  background-color: aquamarine;
+}
+
+.validName,
+.validNumber {
+  border: 2px solid green;
+}
+
+.buttonChangeModal {
+  background: linear-gradient(to right, rgb(0, 255, 0), #37b5e1);
+  font-size: 24px;
+}
+
+.buttonChangeModal:disabled {
+  opacity: 0.3;
+  color: white;
+  cursor: not-allowed;
+}
