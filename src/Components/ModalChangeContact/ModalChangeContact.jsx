@@ -40,13 +40,15 @@ export const ModalChangeContact = () => {
             id: id,
           })
         )
-          .then(() => toast.success("A contact was sucescessfully changed"))
+          .unwrap()
+          .then(() => {
+            toast.success("A contact was sucescessfully changed");
+            dispatch(closeChangeModal());
+          })
           .catch(() => toast.error("Something went wrong. Please try again"));
-        dispatch(closeChangeModal());
       }}
     >
       {({ dirty, isValid, errors }) => {
-        console.log(errors);
         return (
           <Form className={css.form}>
             <Field

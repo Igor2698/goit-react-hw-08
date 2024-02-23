@@ -1,10 +1,9 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { register } from "../../redux/auth/authOperations";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import css from "../RegisterForm/RegisterForm.module.css";
 import * as Yup from "yup";
-import { selectAuthError } from "../../redux/selectors";
 
 const RegistrationSchema = Yup.object().shape({
   name: Yup.string()
@@ -31,15 +30,18 @@ const RegistrationSchema = Yup.object().shape({
 export const RegisterForm = () => {
   const dispatch = useDispatch();
   const handleSubmit = (values, actions) => {
-    dispatch(register(values)).then((data) => {
-      if (data.payload === 400) {
-        toast.error("There is already a user with the same email");
-        return;
-      } else if (data.payload === 404) {
+    dispatch(register(values))
+      .unwrap()
+      .then((data) => {
+        toast.success(`Welcome, ${data.user.name}`);
+      })
+      .catch((error) => {
+        if (error === 400) {
+          toast.error("There is already a user with the same email");
+          return;
+        }
         toast.error("Something went wrong. Please try to reload the page");
-      }
-      toast.success(`Welcome, ${data.payload.user.name}`);
-    });
+      });
 
     actions.resetForm();
   };

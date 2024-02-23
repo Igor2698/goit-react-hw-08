@@ -6,6 +6,12 @@ const contactsInitialState = {
     items: [],
     isLoading: false,
     error: null,
+    contactToChange: {
+        name: '',
+        number: '',
+        id: ''
+    },
+    idToDelete: null,
 }
 
 const handlePending = (state) => {
@@ -20,6 +26,14 @@ const handleRejected = (state, action) => {
 const contactsSlice = createSlice({
     name: 'contact',
     initialState: contactsInitialState,
+    reducers: {
+        setIdToDelete(state, actions) {
+            state.idToDelete = actions.payload;
+        },
+        setContactToChange(state, actions) {
+            state.contactToChange = actions.payload;
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(fetchContacts.pending, handlePending)
             .addCase(fetchContacts.fulfilled, (state, action) => {
@@ -57,3 +71,5 @@ const contactsSlice = createSlice({
 
 
 export const contactsReducer = contactsSlice.reducer;
+export const { setIdToDelete, setContactToChange } = contactsSlice.actions;
+

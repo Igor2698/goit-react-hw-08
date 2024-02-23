@@ -17,14 +17,12 @@ import Loader from "../Loader/Loader";
 function App() {
   const isRefreshing = useSelector(selectIsRefreshing);
   const dispatch = useDispatch();
-  const isToastShownRef = useRef(false);
   useEffect(() => {
-    dispatch(refreshUser()).then((data) => {
-      if (!isToastShownRef.current && data.type !== "auth/refresh/rejected") {
-        toast.success(`Welcome, ${data.payload.name}`);
-        isToastShownRef.current = true;
-      }
-    });
+    dispatch(refreshUser())
+      .unwrap()
+      .then((data) => {
+        toast.success(`Welcome, ${data.name}`);
+      });
   }, [dispatch]);
 
   return isRefreshing ? (

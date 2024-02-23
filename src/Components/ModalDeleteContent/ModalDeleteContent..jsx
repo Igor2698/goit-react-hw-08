@@ -11,10 +11,12 @@ export const ModalDeleteContent = () => {
   const idToDelete = useSelector(selectIdToDelete);
 
   function handleDelete() {
-    dispatch(deleteContact(idToDelete)).then(() =>
-      toast.success("A contact was successfully deleted")
-    );
-    dispatch(closeDeleteModal());
+    dispatch(deleteContact(idToDelete))
+      .unwrap()
+      .then(() => {
+        toast.success("A contact was successfully deleted");
+        dispatch(closeDeleteModal());
+      });
   }
 
   return (

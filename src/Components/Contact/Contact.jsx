@@ -1,13 +1,12 @@
 import { useDispatch } from "react-redux";
 import css from "../Contact/Contact.module.css";
-import {
-  openChangeModal,
-  openDeleteModal,
-  setContactToChange,
-  setIdToDelete,
-} from "../../redux/modal/modalSlice";
+import { openChangeModal, openDeleteModal } from "../../redux/modal/modalSlice";
 import { MdDelete } from "react-icons/md";
 import { FaUserEdit } from "react-icons/fa";
+import {
+  setContactToChange,
+  setIdToDelete,
+} from "../../redux/contacts/contactsSlice";
 
 const Contact = ({ name, number, id }) => {
   const dispatch = useDispatch();
